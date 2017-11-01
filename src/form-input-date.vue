@@ -3,7 +3,6 @@
 </template>
 <script>
     import flatPickr from 'vue-flatpickr-component';
-    import 'flatpickr/dist/flatpickr.css';
     import { props, beforeMount, computed, methods } from './_defaultInput';
     export default {
         props,
@@ -24,3 +23,6 @@
         }
     };
 </script>
+<style lang="scss">
+    @import '../node_modules/flatpickr/dist/flatpickr.css';
+</style>
