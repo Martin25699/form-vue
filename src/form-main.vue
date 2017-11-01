@@ -7,6 +7,7 @@
     import form from './store/form';
     import { FORM_SET_ACTION, FORM_GET_FIELDS, FORM_LOADING } from './store/form.types'
     export default {
+        name: 'form-main',
         props: {
             done:{
                 type: Function,
