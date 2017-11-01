@@ -1,8 +1,8 @@
 <template>
     <div class="form-group" :class="!!_errorField ? 'has-error' : 'has-success'">
-        <label class="form-label" :for="_nameField" v-text="_titleField"></label>
+        <form-label :name="_nameField" :title="_titleField"></form-label>
         <slot></slot>
-        <p class="form-input-hint" v-if="!!_errorField" v-text="_errorField"></p>
+        <form-error :error="_errorField"></form-error>
     </div>
 </template>
 <script>

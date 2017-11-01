@@ -1,6 +1,8 @@
 import formMain from './form-main.vue';
 
 import formGroup from './form-group.vue';
+import formLabel from './form-label.vue';
+import formError from './form-error.vue';
 
 import formInput from './form-input.vue';
 import formInputDate from './form-input-date.vue';
@@ -15,10 +17,12 @@ export function install (Vue, options) {
 
         Vue.component(formMain.name, formMain);
         Vue.component('form-group', formGroup);
+        Vue.component('form-error', formError);
+        Vue.component('form-label', formLabel);
         Vue.component('form-input', formInput);
         Vue.component('form-input-date', formInputDate);
         Vue.component('form-textarea', formTextarea);
         Vue.component('form-select', formSelect);
         Vue.component('form-submit', formSubmit);
-};
+}
 export default { install }
