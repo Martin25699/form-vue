@@ -6,7 +6,9 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
-    filename: 'index.js'
+    filename: 'index.js',
+    library:'form-vue',
+    libraryTarget: 'umd'
   },
   module: {
     rules: [
@@ -33,6 +35,9 @@ module.exports = {
       }
     ]
   },
+  externals: {
+      vue: 'vue'
+  },
   resolve: {
     alias: {
       'vue$': 'vue/dist/vue.esm.js'
@@ -40,8 +45,7 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
-    noInfo: true,
-    overlay: true
+    noInfo: true
   },
   performance: {
     hints: false
@@ -59,7 +63,7 @@ if (process.env.NODE_ENV === 'production') {
       }
     }),
     new webpack.optimize.UglifyJsPlugin({
-      sourceMap: false,
+      sourceMap: true,
       compress: {
         warnings: false
       }
