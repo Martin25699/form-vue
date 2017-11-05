@@ -62,9 +62,12 @@
                 this.fields[name] = value;
                 this.fieldsDefault[name] = value;
             },
-            _setField(name,value = null){
-                if(this.fields[name] !== undefined){
-                    this.$set(this, 'fields', {...this.fields,...{[name]:value}})
+            _setField: function (name, value = null) {
+                if (this.fields[name] !== undefined) {
+                    if (this.errors[name] !== undefined) {
+                        this.$set(this, 'errors', delete this.errors[name])
+                    }
+                    this.$set(this, 'fields', {...this.fields, ...{[name]: value}});
                 }
             },
             _getField(name) {

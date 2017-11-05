@@ -1,5 +1,5 @@
 <template>
-    <div class="form-group" :class="!!_errorField ? 'has-error' : 'has-success'">
+    <div class="form-group" :class="{'has-error':!!_errorField}">
         <form-label :name="_nameField" :label="_labelField" v-if="_showLabel"></form-label>
         <form-field v-model="_valueField" :type="_typeField" :options="_optionsField"></form-field>
         <form-error :error="_errorField" v-if="_showError"></form-error>
@@ -26,6 +26,9 @@
             _typeField() {
                 return this.type;
             },
+            _labelField() {
+                return this.label;
+            },
             _nameField() {
                 return this.name;
             },
@@ -42,9 +45,6 @@
             },
             _errorField() {
                 return this.$parent._getError(this._nameField);
-            },
-            _labelField() {
-                return this.label;
             },
             _showLabel(){
                 return !(this._typeField === 'hidden' || !this._labelField);
