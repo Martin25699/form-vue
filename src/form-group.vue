@@ -1,30 +1,60 @@
 <template>
     <div class="form-group" :class="!!_errorField ? 'has-error' : 'has-success'">
-        <form-label :name="_nameField" :title="_titleField"></form-label>
-        <slot></slot>
-        <form-error :error="_errorField"></form-error>
+        <form-label :name="_nameField" :label="_labelField" v-if="_showLabel"></form-label>
+        <form-field v-model="_valueField" :type="_typeField" :options="_optionsField"></form-field>
+        <form-error :error="_errorField" v-if="_showError"></form-error>
     </div>
 </template>
 <script>
-    import { FORM_GET_ERROR } from './store/form.types';
+    import { FORM_GROUP } from './CONSTANTS';
     export default {
-        props:['name'],
-        computed: {
-            _storeName(){
-                return this.$parent._storeName;
+        name: FORM_GROUP,
+        props:{
+            name: String,
+            label: String,
+            value: String|Array,
+            options: {
+                type: Array,
+                default: null
             },
-            _FORM_GET_ERROR() {
-                return this._storeName+'/'+FORM_GET_ERROR;
+            type: {
+                type: String,
+                default: 'text'
+            },
+        },
+        computed: {
+            _typeField() {
+                return this.type;
             },
             _nameField() {
                 return this.name;
             },
+            _optionsField() {
+                return this.options;
+            },
+            _valueField: {
+                get(){
+                    return this.$parent._getField(this._nameField);
+                },
+                set(value){
+                    this.$parent._setField(this._nameField,value);
+                }
+            },
             _errorField() {
-                return this.$store.getters[this._FORM_GET_ERROR](this._nameField);
+                return this.$parent._getError(this._nameField);
             },
-            _titleField() {
-                return this.$attrs.title;
+            _labelField() {
+                return this.label;
             },
+            _showLabel(){
+                return !(this._typeField === 'hidden' || !this._labelField);
+            },
+            _showError(){
+                return !(this._typeField === 'hidden' || !this._errorField);
+            }
+        },
+        beforeMount(){
+            this.$parent._addField(this.name, this.value);
         }
     }
 </script>

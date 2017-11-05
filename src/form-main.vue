@@ -1,21 +1,20 @@
 <template>
-    <form @submit.prevent="submit" ref="profile">
+    <form @submit.prevent="_submitForm" ref="profile">
         <slot></slot>
     </form>
 </template>
 <script>
-    import form from './store/form';
-    import { FORM_SET_ACTION, FORM_GET_FIELDS, FORM_LOADING } from './store/form.types'
+    import { FORM_MAIN } from './CONSTANTS';
     export default {
-        name: 'form-main',
+        name: FORM_MAIN,
         props: {
             done:{
                 type: Function,
                 default: () => {}
             },
-            storeName:{
-                type: String,
-                default: 'form'
+            fail:{
+                type: Function,
+                default: () => {}
             },
             action:{
                 type: String,
@@ -24,50 +23,53 @@
             method: {
                 type: String,
                 default: 'post',
-            }},
-        computed:{
-            _storeName(){
-              return this.storeName;
-            },
-            _FORM_SET_ACTION(){
-              return this.storeName+'/'+FORM_SET_ACTION;
-            },
-            _FORM_GET_FIELDS(){
-              return this.storeName+'/'+FORM_GET_FIELDS;
-            },
-            _FORM_LOADING(){
-              return this.storeName+'/'+FORM_LOADING;
-            },
-            _FIELDS(){
-                return this.$store.getters[this._FORM_GET_FIELDS];
             }
         },
-        methods: {
-            submit(){
+        data(){
+          return {
+              errors:{},
+              fields:{},
+              fieldsDefault:{}
+          }
+        },
+        methods:{
+            _setErrors(errors){
+                for(let name in errors)
+                {
+                    if(errors.hasOwnProperty(name) && this.fields.hasOwnProperty(name)){
+                        this.$set(this, 'errors', {...this.errors,...{[name]:errors[name]}})
+                    }
+                }
+            },
+            _getError(name) {
+                return this.errors[name] ? this.errors[name][0] : null;
+            },
+            _submitForm(){
                 let method = this.method;
                 let action = this.action;
-                let data = this._FIELDS;
-                this.$store.commit(this._FORM_LOADING, true);
+                let data = this.fields;
                 this.$http[method](action,data)
                     .then(response => {
-                        this.$store.commit(this._FORM_LOADING, false);
-                        console.log(response);
-                        this.done();
+                        this.done(response);
                     })
                     .catch(response => {
-                        this.$store.commit(this._FORM_LOADING, false);
-                        console.log(response);
+                        console.log(response.errors);
+                        this._setErrors(response.errors);
+                        this.fail(response);
                     });
+            },
+            _addField(name,value = null){
+                this.fields[name] = value;
+                this.fieldsDefault[name] = value;
+            },
+            _setField(name,value = null){
+                if(this.fields[name] !== undefined){
+                    this.$set(this, 'fields', {...this.fields,...{[name]:value}})
+                }
+            },
+            _getField(name) {
+                return this.fields[name] ? this.fields[name] : null;
             }
-        },
-        beforeMount() {
-            if(!this.$store.state.forms){
-                this.$store.registerModule(['forms'],{});
-            }
-            if(!this.$store.state.forms[this._storeName]){
-                this.$store.registerModule(['forms',this._storeName],form);
-            }
-            this.$store.commit(this._FORM_SET_ACTION, this.action)
         }
     }
 </script>

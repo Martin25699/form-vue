@@ -1,8 +1,10 @@
 <template>
-    <label class="form-label" :for="name" v-text="title"></label>
+    <label class="form-label" :for="name" v-text="label"></label>
 </template>
 <script>
+    import { FORM_LABEL } from './CONSTANTS';
     export default {
-        props:['name','title']
+        name: FORM_LABEL,
+        props:['name','label']
     }
 </script>

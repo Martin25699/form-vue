@@ -4,10 +4,12 @@ import formGroup from './form-group.vue';
 import formLabel from './form-label.vue';
 import formError from './form-error.vue';
 
-import formInput from './form-input.vue';
-import formInputDate from './form-input-date.vue';
-import formSelect from './form-select.vue';
-import formTextarea from './form-textarea.vue';
+import formField from './form-field.vue';
+
+import formInput from './fields/form-input.vue';
+import formInputDate from './fields/form-input-date.vue';
+import formSelect from './fields/form-select.vue';
+import formTextarea from './fields/form-textarea.vue';
 
 import formSubmit from './form-submit.vue';
 
@@ -16,13 +18,14 @@ export function install (Vue, options) {
         install.installed = true;
 
         Vue.component(formMain.name, formMain);
-        Vue.component('form-group', formGroup);
-        Vue.component('form-error', formError);
-        Vue.component('form-label', formLabel);
-        Vue.component('form-input', formInput);
-        Vue.component('form-input-date', formInputDate);
-        Vue.component('form-textarea', formTextarea);
-        Vue.component('form-select', formSelect);
-        Vue.component('form-submit', formSubmit);
+        Vue.component(formField.name, formField);
+        Vue.component(formGroup.name, formGroup);
+        Vue.component(formError.name, formError);
+        Vue.component(formLabel.name, formLabel);
+        Vue.component(formInput.name, formInput);
+        Vue.component(formInputDate.name, formInputDate);
+        Vue.component(formTextarea.name, formTextarea);
+        Vue.component(formSelect.name, formSelect);
+        Vue.component(formSubmit.name, formSubmit);
 }
 export default { install }
