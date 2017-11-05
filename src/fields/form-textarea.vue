@@ -3,9 +3,9 @@
 </template>
 <script>
     import { computed } from './_defaultInput';
-    import { FORM_SELECT_FIELD } from '../CONSTANTS';
+    import { FORM_TEXTAREA_FIELD } from '../CONSTANTS';
     export default {
-        name: FORM_SELECT_FIELD,
+        name: FORM_TEXTAREA_FIELD,
         props:{
             value:String|Array
         },
