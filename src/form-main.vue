@@ -53,7 +53,6 @@
                         this.done(response);
                     })
                     .catch(response => {
-                        console.log(response.errors);
                         this._setErrors(response.errors);
                         this.fail(response);
                     });
