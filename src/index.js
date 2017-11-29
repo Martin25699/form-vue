@@ -9,6 +9,7 @@ import formField from './form-field.vue';
 import formInput from './fields/form-input.vue';
 import formInputDate from './fields/form-input-date.vue';
 import formSelect from './fields/form-select.vue';
+import formCheckbox from './fields/form-radio.vue';
 import formTextarea from './fields/form-textarea.vue';
 
 import formSubmit from './form-submit.vue';
@@ -26,6 +27,7 @@ export function install (Vue, options) {
         Vue.component(formInputDate.name, formInputDate);
         Vue.component(formTextarea.name, formTextarea);
         Vue.component(formSelect.name, formSelect);
+        Vue.component(formCheckbox.name, formCheckbox);
         Vue.component(formSubmit.name, formSubmit);
 }
 export default { install }

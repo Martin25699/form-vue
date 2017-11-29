@@ -1,7 +1,7 @@
 <template>
     <div class="form-group" :class="{'has-error':!!_errorField}">
         <form-label :name="_nameField" :label="_labelField" v-if="_showLabel"></form-label>
-        <form-field v-model="_valueField" :type="_typeField" :options="_optionsField" :disabled="_loading"></form-field>
+        <form-field v-model="_valueField" :type="_typeField" :options="_optionsField" :disabled="_loading" :name="name"></form-field>
         <form-error :error="_errorField" v-if="_showError"></form-error>
     </div>
 </template>

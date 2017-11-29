@@ -8,6 +8,7 @@ exports.PASSWORD_TYPE = 'password';
 exports.EMAIL_TYPE = 'email';
 exports.TEXTAREA_TYPE = 'textarea';
 exports.SELECT_TYPE = 'select';
+exports.RADIO_TYPE = 'radio';
 exports.DATE_TYPE = 'date';
 
 /**
@@ -18,6 +19,7 @@ exports.FORM_INPUT_FIELD = 'form-input';
 exports.FORM_DATE_FIELD = 'form-input-date';
 exports.FORM_TEXTAREA_FIELD = 'form-textarea';
 exports.FORM_SELECT_FIELD = 'form-select';
+exports.FORM_RADIO_FIELD = 'form-radio';
 exports.FORM_FIELD = 'form-field';
 exports.FORM_ERROR = 'form-error';
 exports.FORM_GROUP = 'form-group';
