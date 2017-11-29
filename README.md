@@ -5,7 +5,7 @@
 ## Build Setup
 
 ### install
-``` bash
+```bash
 npm i form-vue --save
 ```
 ### How to
@@ -47,6 +47,3 @@ this.$http[method](action,data)
     <form-submit text="Send Fail"></form-submit>
 </form-main>
 ```
-
-
-For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
